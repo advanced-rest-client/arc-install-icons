@@ -1,5 +1,6 @@
 {
   "name": "arc-install-icons",
+  "version": "0.0.1",
   "description": "Set of icons for ARC install website",
   "main": "arc-install-icons.html",
   "dependencies": {
