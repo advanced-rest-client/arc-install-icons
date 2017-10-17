@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>arc-install-icons demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../paper-styles/demo-pages.html">
+    <link rel="import" href="../../paper-styles/color.html">
+    <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="../../iron-icon/iron-icon.html">
+    <link rel="import" href="../../iron-meta/iron-meta.html">
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+    <link rel="import" href="../arc-install-icons.html">
+    
+    <custom-style>
+      <style is="custom-style">
+        h2 {
+          text-transform: capitalize;
+        }
+
+        iron-icon {
+          transition: all 0.2s;
+          -webkit-transition: all 0.2s;
+          width: 24px;
+          height: 24px;
+        }
+
+        iron-icon:hover {
+          fill: var(--google-yellow-700);
+        }
+
+        .set {
+          margin: auto;
+          padding: 1em 0;
+          border-bottom: 1px solid silver;
+          @apply --layout-horizontal;
+          @apply --layout-wrap;
+        }
+
+        .set:last-of-type {
+          border-bottom: none;
+        }
+
+        .set:nth-of-type(4n-3) {
+          color: var(--paper-grey-700);
+        }
+
+        .set:nth-of-type(4n-2) {
+          color: var(--paper-pink-500);
+        }
+
+        .set:nth-of-type(4n-1) {
+          color: var(--google-green-500);
+        }
+
+        .set:nth-of-type(4n) {
+          color: var( --google-blue-500);
+        }
+        
+        .container {
+          min-width: 10em;
+          padding: 1em 0.5em;
+          text-align: center;
+          @apply --layout-vertical;
+          @apply --layout-center;
+          @apply --layout-flex;
+        }
+
+        .container> div {
+          margin-top: 0.5em;
+          color: black;
+          font-size: 10px;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <iron-meta id="meta" type="iconset"></iron-meta>
+    <dom-bind id="demo">
+      <template is="dom-bind">
+        <template is="dom-repeat" items="[[iconsets]]">
+          <h2>[[item.name]]</h2>
+          <div class="set">
+            <template is="dom-repeat" items="[[getIconNames(item)]]">
+              <span class="container">
+                <iron-icon icon="[[item]]"></iron-icon>
+                <div>[[item]]</div>
+              </span>
+            </template>
+          </div>
+        </template>
+      </template>
+    </dom-bind>
+
+    <!-- <dom-bind id="demo">
+      <template is="dom-bind">
+        <iron-meta type="iconset" list="{{iconsets}}"></iron-meta>
+        <template is="dom-repeat" items="[[iconsets]]">
+          <h2>[[item.name]]</h2>
+          
+        </template>
+      </template>
+    </dom-bind> -->
+    <script>
+    document.getElementById('meta').addEventListener('value-changed', function(e) {
+      debugger;
+      console.log(e.detail.value);
+    });
+    document.getElementById('demo').getIconNames = function(iconset) {
+      return iconset.getIconNames();
+    };
+    window.addEventListener('WebComponentsReady', function() {
+      document.getElementById('demo').iconsets = 
+        document.getElementById('meta').list;
+    });
+    // document.getElementById('demo').iconsets = [];
+    </script>      
+  </body>
+</html>
